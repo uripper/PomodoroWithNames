@@ -1,5 +1,5 @@
 import time
-import tqdm 
+import tqdm
 import sksound
 from playsound import playsound
 from ctypes import *
@@ -23,7 +23,12 @@ math = {"udemy": 120, "reading":60, "brilliant":60}
 home = {"chores": 30, "exercise":30}
 hobby = {"duolingo":15, "reading":20, "random discovery":120}
 
-tasks = {"Work":{k:v for k, v in work_dict.items()}, "Math":{k:v for k, v in math.items()}, "home":{k:v for k, v in home.items()}, "hobby":{k:v for k, v in hobby.items()}}
+tasks = {
+    "Work": dict(work_dict),
+    "Math": dict(math),
+    "home": dict(home),
+    "hobby": dict(hobby),
+}
 
 
 
@@ -58,7 +63,7 @@ for i in tasks:
         print(chunk)
         # if chunk is less than 1, then combine it with the next task
 
-            
+
         for l in range(int(chunk)):
             print(f"Task: {i}: {j}, Chunk: {l+1}/{int(chunk)}")
             if chunk < 1:
@@ -67,11 +72,11 @@ for i in tasks:
                 new_work = work
                 print(new_work)
 
-            for k in tqdm.tqdm(range(new_work*60)):
-               time.sleep(1)
+            for _ in tqdm.tqdm(range(new_work*60)):
+                time.sleep(1)
             total_time = break_time(cycle_num, total_time)
             total_time += new_work
-            
+
             cycle_num += 1
 
 print(total_time)
